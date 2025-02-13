@@ -62,4 +62,13 @@ class ArticleDetailGenericAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     lookup_field = 'id'
 
+class ArticleModelViewSet(viewsets.ModelViewSet):
+    model = Article
+    queryset = model.objects.all()
+    serializer_class = ArticleSerializer
+
+class CategoryModelViewSet(viewsets.ModelViewSet):
+    model = Category
+    queryset = model.objects.all()
+    serializer_class = CategorySerializer
 
