@@ -72,3 +72,45 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
     queryset = model.objects.all()
     serializer_class = CategorySerializer
 
+class ArticleViewSet(viewsets.ViewSet):
+    model = Article
+    serializer_class = ArticleSerializer
+
+    def list(self, request):
+        model_obj = self.get_object()
+        serializer = self.serializer_class(model_obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        body_req = request.data
+        serializer = self.serializer_class(data=body_req)
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+        return Response({'model create successfully'}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, pk=None):
+        model_obj = self.model.objects.get(pk=pk)
+        serializer = self.serializer_class(model_obj)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk=None):
+        model_obj = self.model.objects.get(pk=pk)
+        body_req = request.data
+        serializer = self.serializer_class(model_obj, data=body_req)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'model update successfully'}, status=status.HTTP_200_OK)
+
+    def patch(self, request, pk=None):
+        model_obj = self.model.objects.get(pk=pk)
+        body_req = request.data
+        serializer = self.serializer_class(model_obj, data=body_req)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'model update successfully'}, status=status.HTTP_200_OK)
+
+    def delete(self, request, pk=None):
+        model_obj = self.model.objects.get(pk=pk)
+        model_obj.delete()
+        return Response({'model delete successfully'}, status=status.HTTP_204_NO_CONTENT)

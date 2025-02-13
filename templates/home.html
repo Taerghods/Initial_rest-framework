@@ -1,0 +1,83 @@
+{% include 'header.html' %}
+{% block main %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        direction: rtl;
+    }
+    .btn_blue {
+        padding: 15px 30px;
+        font-size: 16px;
+        margin: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        }
+    .main{
+        height: 150px;
+        padding: 25px 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    h2{
+        color: #ff8000;
+    }
+</style>
+<div class="main">
+    <h2>" به وبلاگ ما خوش آمدید! "</h2>
+    <button class="btn_blue" onclick="fetchArticle()">مقالات</button>
+    <button class="btn_blue" onclick="fetchCategory()">دسته بندی ها</button>
+</div>
+<div class="main1">Mostafa</div>
+<script>
+    // fetchArticle()
+    // async function fetchArticle() {
+    //     const response = await fetch('http://127.0.0.1:8000/api/article_list_api/')
+    //     console.log(response)
+    //     console.log(await response.json())
+    // }
+    // fetchCategory()
+    // async function fetchCategory() {
+    //     const response = await fetch('http://127.0.0.1:8000/api/category_api/')
+    //     console.log(response)
+    //     console.log(await response.json())
+    // }
+    function fetchArticle() {
+    const url = `/api/article_list_api/`;
+    fetch(url, {
+            method: 'GET',
+        }) // Replace with your API endpoint URL
+        .then(response => response.json())
+        .then(data => {
+            // Process the fetched data here
+            console.log(data);
+
+    const articles = data;
+    console.log(articles)
+    const main1 = document.querySelector('.main1');
+
+
+    articles.forEach(art => {
+        const container = document.createElement('div');
+        container.classList.add('main1_01');
+        container.textContent = art.title
+        // container.textContent += art.content
+
+        main1.appendChild(container);
+
+        });
+        })
+        .catch(error => {
+            // Handle any errors that occur during fetch
+            console.error('Error fetching data:', error);
+        });
+}
+
+    // Trigger the fetch operation once the page loads
+    // window.onload = fetchArticle();
+
+</script>
+{% endblock main %}
+{% include 'footer.html' %}

@@ -4,6 +4,7 @@ from .views import *
 
 router = DefaultRouter()
 router.register('article_m_set', ArticleModelViewSet, basename='article_m_set'),
+router.register('article_set', ArticleViewSet, basename='article_set'),
 router.register('category_set', CategoryModelViewSet, basename='category_set'),
 # urlpatterns = router.urls
 # urlpatterns += [

@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="fa">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maktab Sharif</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-    {% block head %}
-        {% include 'link & script.html' %}
-    {% endblock head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>online SuperMarket</title>
 </head>
-<body class="overflow-x-hidden font-sans">
+<style>
+    *,
+    *::after,
+    *::before{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: #e6f4d8;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    main{
+        padding: 30px 0;
+    }
+</style>
+<body dir="rtl">
     <header>
         {% block header %}
             {% include 'header.html' %}
         {% endblock header %}
     </header>
+    <hr/>
     <main>
         {% block main %}
             {% include 'home.html' %}
         {% endblock main %}
     </main>
+    <hr/>
     <footer>
         {% block footer %}
              {% include 'footer.html' %}
