@@ -60,7 +60,3 @@ class ArticleDetailGenericAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-class BookModelViewSet(viewsets.ModelViewSet):
-    model = Book
-    queryset = model.objects.all()
-    serializer_class = BookSerializer
