@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maktab Sharif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    {% block head %}
+        {% include 'link & script.html' %}
+    {% endblock head %}
+</head>
+<body class="overflow-x-hidden font-sans">
+    <header>
+        {% block header %}
+            {% include 'header.html' %}
+        {% endblock header %}
+    </header>
+    <main>
+        {% block main %}
+            {% include 'home.html' %}
+        {% endblock main %}
+    </main>
+    <footer>
+        {% block footer %}
+             {% include 'footer.html' %}
+        {% endblock footer %}
+    </footer>
+</body>
+</html>

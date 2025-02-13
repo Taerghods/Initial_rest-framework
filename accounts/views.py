@@ -32,8 +32,7 @@ class LogoutView(View):
 
 class ProfileView(View):
     def get(self, request):
-
         return render(request, 'accounts/profile.html')
 
     def post(self, request):
-
+        return render(request, 'accounts/profile.html')
