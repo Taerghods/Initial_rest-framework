@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import status, generics, viewsets
+from rest_framework.exceptions import NotFound
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -77,15 +78,14 @@ class ArticleViewSet(viewsets.ViewSet):
     serializer_class = ArticleSerializer
 
     def list(self, request):
-        model_obj = self.get_object()
+        model_obj = self.model.objects.all()
         serializer = self.serializer_class(model_obj, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def create(self, request):
+    def post(self, request):
         body_req = request.data
         serializer = self.serializer_class(data=body_req)
         serializer.is_valid(raise_exception=True)
-
         serializer.save()
         return Response({'model create successfully'}, status=status.HTTP_200_OK)
 
@@ -111,6 +111,9 @@ class ArticleViewSet(viewsets.ViewSet):
         return Response({'model update successfully'}, status=status.HTTP_200_OK)
 
     def delete(self, request, pk=None):
-        model_obj = self.model.objects.get(pk=pk)
-        model_obj.delete()
-        return Response({'model delete successfully'}, status=status.HTTP_204_NO_CONTENT)
+        try:
+                model_obj = self.model.objects.get(pk=pk)
+                model_obj.delete()
+                return Response({'model delete successfully'}, status=status.HTTP_204_NO_CONTENT)
+        except Article.DoesNotExist:
+                raise NotFound("Article not found.")
