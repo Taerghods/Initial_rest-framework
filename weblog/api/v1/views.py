@@ -12,6 +12,7 @@ class CategoryAPIView(APIView):
     permission_classes = [IsAuthenticated]
     model = Category
     serializer_class = CategorySerializer
+    lookup_field = 'id'
 
     def get(self, request, id=None, *args, **kwargs):
         if id is None:
@@ -59,4 +60,6 @@ class ArticleListGenericAPIView(generics.ListCreateAPIView):
 class ArticleDetailGenericAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    lookup_field = 'id'
+
 
